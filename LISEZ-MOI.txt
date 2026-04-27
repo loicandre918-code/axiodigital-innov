@@ -1,0 +1,70 @@
+# 🦕 Dinovation Digital — Projet débutant
+
+## Comment ouvrir le projet ?
+
+1. Dézippe le dossier sur ton bureau
+2. Ouvre le dossier `dinovation`
+3. Double-clique sur `index.html`
+4. La page s'ouvre dans ton navigateur !
+
+## Structure des fichiers
+
+```
+dinovation/
+│
+├── index.html              ← Page d'accueil (commence ici !)
+│
+├── css/
+│   └── style.css           ← Toutes les couleurs et le design
+│
+├── js/
+│   └── main.js             ← Les animations et interactions
+│
+├── pages/
+│   ├── services.html       ← Page des services
+│   ├── contact.html        ← Formulaire de contact
+│   ├── login.html          ← Page de connexion
+│   └── dashboard.html      ← Espace client (après connexion)
+│
+└── admin/
+    └── dashboard.html      ← Panneau admin (après connexion admin)
+```
+
+## Comptes de test
+
+| Rôle   | Email           | Mot de passe |
+|--------|-----------------|--------------|
+| Client | client@demo.fr  | client123    |
+| Admin  | admin@demo.fr   | admin123     |
+
+## Exercices pour apprendre
+
+### Niveau 1 — Modifier le texte
+- Ouvre `index.html` et change le texte du `<h1>`
+- Change les couleurs dans `css/style.css` (cherche `:root`)
+
+### Niveau 2 — Modifier le style
+- Change `--violet: #534AB7` par une autre couleur, par ex. `#E24B4A`
+- Vois comment TOUT le site change d'un coup !
+
+### Niveau 3 — JavaScript
+- Dans `js/main.js`, change les valeurs 120, 340, 18 par d'autres chiffres
+- Recharge la page et regarde les compteurs changer
+
+### Niveau 4 — Ajouter une page
+- Copie `pages/services.html`, renomme-la `pages/apropos.html`
+- Modifie le contenu
+- Ajoute un lien dans le menu de toutes les pages
+
+## Ce que tu as dans ce projet
+
+- Navigation qui fonctionne entre toutes les pages
+- Design professionnel avec CSS custom
+- Formulaire de contact avec validation JavaScript
+- Système de connexion simulé (client / admin)
+- Espace client avec tableau de bord
+- Panneau admin avec métriques et graphique
+- Animations de compteurs
+- Design responsive (fonctionne sur mobile)
+
+Bon apprentissage ! 🚀

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mon espace — Dinovation Digital</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .dashboard-layout {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      min-height: calc(100vh - 64px);
+    }
+    .sidebar {
+      background: var(--violet-fonce);
+      padding: 32px 0;
+    }
+    .sidebar-title {
+      color: rgba(255,255,255,0.5);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      padding: 0 24px;
+      margin-bottom: 12px;
+    }
+    .sidebar a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      padding: 12px 24px;
+      font-size: 15px;
+      transition: all 0.2s;
+    }
+    .sidebar a:hover, .sidebar a.active {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+    .sidebar a .ico { font-size: 18px; }
+    .main-content {
+      background: var(--fond-gris);
+      padding: 40px;
+    }
+    .welcome-bar {
+      background: white;
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid var(--bordure);
+    }
+    .welcome-bar h1 { font-size: 22px; color: var(--violet-fonce); }
+    .welcome-bar p  { color: var(--texte-gris); font-size: 14px; margin-top: 4px; }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .metric {
+      background: white;
+      border: 1px solid var(--bordure);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-align: center;
+    }
+    .metric .num { font-size: 36px; font-weight: 800; color: var(--violet); }
+    .metric .lbl { font-size: 13px; color: var(--texte-gris); margin-top: 4px; }
+    .section-card {
+      background: white;
+      border: 1px solid var(--bordure);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+    .section-card h2 { font-size: 18px; color: var(--violet-fonce); margin-bottom: 20px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th { text-align: left; padding: 10px 12px; color: var(--texte-gris); font-weight: 600; border-bottom: 1px solid var(--bordure); }
+    td { padding: 12px; border-bottom: 1px solid var(--fond-gris); }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 99px; font-size: 12px; font-weight: 600; }
+    .badge-actif   { background: var(--teal-clair); color: #085041; }
+    .badge-attente { background: #FAEEDA; color: #633806; }
+    .badge-termine { background: var(--fond-gris); color: var(--texte-gris); }
+    @media (max-width: 700px) {
+      .dashboard-layout { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .main-content { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="container" style="max-width:100%; padding: 0 24px;">
+      <div class="logo">🦕 Dinovation Digital</div>
+      <div style="display:flex; align-items:center; gap:16px;">
+        <span id="user-name" style="font-size:14px; color:var(--texte-gris);"></span>
+        <a href="login.html" class="btn-nav" onclick="seDeconnecter()">Déconnexion</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="dashboard-layout">
+
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="sidebar">
+      <div class="sidebar-title">Mon espace</div>
+      <a href="dashboard.html" class="active"><span class="ico">🏠</span> Tableau de bord</a>
+      <a href="#"><span class="ico">📦</span> Mes commandes</a>
+      <a href="#"><span class="ico">💳</span> Facturation</a>
+      <a href="#"><span class="ico">⚙️</span> Mon compte</a>
+      <br/>
+      <div class="sidebar-title">Support</div>
+      <a href="contact.html"><span class="ico">💬</span> Nous contacter</a>
+      <a href="services.html"><span class="ico">🚀</span> Nos services</a>
+    </aside>
+
+    <!-- CONTENU PRINCIPAL -->
+    <main class="main-content">
+
+      <div class="welcome-bar">
+        <div>
+          <h1 id="welcome-msg">Bonjour !</h1>
+          <p>Voici un résumé de votre activité</p>
+        </div>
+        <a href="services.html" class="btn-primary">+ Nouveau projet</a>
+      </div>
+
+      <!-- Métriques -->
+      <div class="metrics">
+        <div class="metric"><div class="num">3</div><div class="lbl">Projets actifs</div></div>
+        <div class="metric"><div class="num">2</div><div class="lbl">En attente</div></div>
+        <div class="metric"><div class="num">8</div><div class="lbl">Terminés</div></div>
+        <div class="metric"><div class="num">4.9 ★</div><div class="lbl">Note moyenne</div></div>
+      </div>
+
+      <!-- Tableau des commandes -->
+      <div class="section-card">
+        <h2>Mes projets en cours</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Projet</th>
+              <th>Service</th>
+              <th>Date</th>
+              <th>Statut</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>App e-commerce</strong></td>
+              <td>Création d'app</td>
+              <td>15 jan. 2025</td>
+              <td><span class="badge badge-actif">En cours</span></td>
+            </tr>
+            <tr>
+              <td><strong>Dashboard analytics</strong></td>
+              <td>Tableau de bord</td>
+              <td>20 jan. 2025</td>
+              <td><span class="badge badge-attente">En attente</span></td>
+            </tr>
+            <tr>
+              <td><strong>Intégration Shopify</strong></td>
+              <td>Shopify</td>
+              <td>01 déc. 2024</td>
+              <td><span class="badge badge-termine">Terminé</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Section notifications -->
+      <div class="section-card">
+        <h2>Notifications récentes</h2>
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <div style="display:flex; gap:14px; align-items:center; padding:14px; background:var(--fond-gris); border-radius:8px;">
+            <span style="font-size:22px;">🔔</span>
+            <div>
+              <div style="font-size:14px; font-weight:600;">Votre projet "App e-commerce" avance bien</div>
+              <div style="font-size:13px; color:var(--texte-gris);">il y a 2 heures</div>
+            </div>
+          </div>
+          <div style="display:flex; gap:14px; align-items:center; padding:14px; background:var(--fond-gris); border-radius:8px;">
+            <span style="font-size:22px;">✅</span>
+            <div>
+              <div style="font-size:14px; font-weight:600;">Facture #INV-2024-012 disponible</div>
+              <div style="font-size:13px; color:var(--texte-gris);">hier</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    // Vérifier si l'utilisateur est connecté
+    const utilisateur = JSON.parse(localStorage.getItem('utilisateur') || 'null');
+    if (!utilisateur) {
+      window.location.href = 'login.html'; // redirige si pas connecté
+    } else {
+      document.getElementById('user-name').textContent = utilisateur.email;
+      document.getElementById('welcome-msg').textContent = 'Bonjour, ' + utilisateur.email.split('@')[0] + ' !';
+    }
+
+    function seDeconnecter() {
+      localStorage.removeItem('utilisateur');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connexion — Dinovation Digital</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .login-page {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--violet-clair), var(--teal-clair));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    .login-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 48px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 20px 60px rgba(83,74,183,0.15);
+    }
+    .login-logo {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--violet-fonce);
+      margin-bottom: 8px;
+    }
+    .login-subtitle {
+      text-align: center;
+      color: var(--texte-gris);
+      font-size: 14px;
+      margin-bottom: 36px;
+    }
+    .login-card .btn-primary { width: 100%; padding: 14px; font-size: 16px; border: none; }
+    .login-footer {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 13px;
+      color: var(--texte-gris);
+    }
+    .login-footer a { color: var(--violet); text-decoration: none; font-weight: 600; }
+    .demo-hint {
+      background: var(--violet-clair);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      font-size: 13px;
+      color: var(--violet-fonce);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    .demo-hint strong { display: block; margin-bottom: 4px; }
+  </style>
+</head>
+<body>
+
+  <div class="login-page">
+    <div class="login-card">
+
+      <div class="login-logo">🦕 Dinovation</div>
+      <div class="login-subtitle">Connectez-vous à votre espace</div>
+
+      <!-- Indice pour tester -->
+      <div class="demo-hint">
+        <strong>Comptes de démonstration :</strong>
+        Client → email : <code>client@demo.fr</code> / mdp : <code>client123</code><br>
+        Admin → email : <code>admin@demo.fr</code> / mdp : <code>admin123</code>
+      </div>
+
+      <div id="login-message" style="display:none;"></div>
+
+      <div class="form-group">
+        <label for="login-email">Email</label>
+        <input type="email" id="login-email" placeholder="votre@email.fr" />
+      </div>
+
+      <div class="form-group">
+        <label for="login-mdp">Mot de passe</label>
+        <input type="password" id="login-mdp" placeholder="••••••••" />
+      </div>
+
+      <button class="btn-primary" onclick="seConnecter()">Se connecter</button>
+
+      <div class="login-footer">
+        Pas encore de compte ? <a href="contact.html">Contactez-nous</a>
+      </div>
+      <div style="text-align:center; margin-top:12px;">
+        <a href="../index.html" style="font-size:13px; color:var(--texte-gris);">← Retour à l'accueil</a>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // --- SIMULATION DE CONNEXION ---
+    // Dans une vraie app, ça enverrait les données à un serveur.
+    // Ici on simule avec des comptes codés en dur pour apprendre.
+
+    const comptes = [
+      { email: 'client@demo.fr', mdp: 'client123', role: 'client',  redirect: 'dashboard.html' },
+      { email: 'admin@demo.fr',  mdp: 'admin123',  role: 'admin',   redirect: '../admin/dashboard.html' }
+    ];
+
+    function seConnecter() {
+      const email = document.getElementById('login-email').value.trim();
+      const mdp   = document.getElementById('login-mdp').value;
+
+      // Chercher si le compte existe
+      const compte = comptes.find(c => c.email === email && c.mdp === mdp);
+
+      if (!compte) {
+        afficherMsg('error', '❌ Email ou mot de passe incorrect. Essayez les comptes de démonstration.');
+        return;
+      }
+
+      // Sauvegarder la session dans le navigateur
+      localStorage.setItem('utilisateur', JSON.stringify({ email: compte.email, role: compte.role }));
+
+      afficherMsg('success', `✅ Connexion réussie ! Redirection vers votre espace ${compte.role}...`);
+
+      // Rediriger après 1.5 secondes
+      setTimeout(() => {
+        window.location.href = compte.redirect;
+      }, 1500);
+    }
+
+    function afficherMsg(type, texte) {
+      const zone = document.getElementById('login-message');
+      zone.className = 'alert alert-' + type;
+      zone.textContent = texte;
+      zone.style.display = 'block';
+    }
+
+    // Permettre de valider avec la touche Entrée
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') seConnecter();
+    });
+  </script>
+</body>
+</html>

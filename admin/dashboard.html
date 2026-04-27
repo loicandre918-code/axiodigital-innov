@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Administration — Dinovation Digital</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <style>
+    body { background: var(--fond-gris); }
+    .admin-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: calc(100vh - 64px);
+    }
+    .sidebar {
+      background: #1a1a2e;
+      padding: 32px 0;
+    }
+    .sidebar-brand {
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 0 24px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 12px;
+    }
+    .sidebar-section { color: rgba(255,255,255,0.35); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; padding: 16px 24px 8px; }
+    .sidebar a {
+      display: flex; align-items: center; gap: 12px;
+      color: rgba(255,255,255,0.7); text-decoration: none;
+      padding: 11px 24px; font-size: 14px; transition: all 0.2s;
+    }
+    .sidebar a:hover, .sidebar a.active { background: rgba(255,255,255,0.08); color: white; }
+    .sidebar a .ico { font-size: 17px; }
+    .main { padding: 36px; }
+    .top-bar { display:flex; align-items:center; justify-content:space-between; margin-bottom:28px; }
+    .top-bar h1 { font-size:22px; color:var(--violet-fonce); }
+    .admin-badge { background:#E24B4A; color:white; font-size:11px; font-weight:700; padding:3px 10px; border-radius:99px; margin-left:10px; }
+    .metrics { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:16px; margin-bottom:28px; }
+    .metric { background:white; border:1px solid var(--bordure); border-radius:var(--radius); padding:24px; }
+    .metric .num { font-size:34px; font-weight:800; color:var(--violet); }
+    .metric .lbl { font-size:13px; color:var(--texte-gris); margin-top:4px; }
+    .metric .change { font-size:12px; color:#1D9E75; margin-top:6px; }
+    .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px; }
+    .card { background:white; border:1px solid var(--bordure); border-radius:var(--radius); padding:24px; }
+    .card h2 { font-size:16px; color:var(--violet-fonce); margin-bottom:18px; }
+    table { width:100%; border-collapse:collapse; font-size:13px; }
+    th { text-align:left; padding:8px 10px; color:var(--texte-gris); font-weight:600; border-bottom:1px solid var(--bordure); font-size:12px; }
+    td { padding:11px 10px; border-bottom:1px solid var(--fond-gris); }
+    .badge { display:inline-block; padding:3px 10px; border-radius:99px; font-size:11px; font-weight:600; }
+    .badge-actif   { background:var(--teal-clair); color:#085041; }
+    .badge-attente { background:#FAEEDA; color:#633806; }
+    .badge-admin   { background:var(--violet-clair); color:var(--violet-fonce); }
+    .action-btn { background:none; border:1px solid var(--bordure); border-radius:6px; padding:4px 10px; font-size:12px; cursor:pointer; color:var(--texte-gris); }
+    .action-btn:hover { border-color:var(--violet); color:var(--violet); }
+    @media (max-width:700px) { .admin-layout { grid-template-columns:1fr; } .sidebar { display:none; } .grid-2 { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="container" style="max-width:100%; padding:0 24px;">
+      <div class="logo">🦕 Dinovation <span class="admin-badge">ADMIN</span></div>
+      <div style="display:flex;align-items:center;gap:16px;">
+        <span id="admin-email" style="font-size:13px;color:var(--texte-gris);"></span>
+        <a href="../../pages/login.html" class="btn-nav" onclick="seDeconnecter()">Déconnexion</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="admin-layout">
+
+    <aside class="sidebar">
+      <div class="sidebar-brand">Panel Admin</div>
+      <div class="sidebar-section">Vue générale</div>
+      <a href="dashboard.html" class="active"><span class="ico">📊</span> Tableau de bord</a>
+      <a href="#"><span class="ico">👥</span> Utilisateurs</a>
+      <a href="#"><span class="ico">📦</span> Commandes</a>
+      <a href="#"><span class="ico">💰</span> Revenus</a>
+      <div class="sidebar-section">Contenu</div>
+      <a href="#"><span class="ico">🛒</span> Services</a>
+      <a href="#"><span class="ico">📝</span> Blog</a>
+      <div class="sidebar-section">Système</div>
+      <a href="#"><span class="ico">⚙️</span> Paramètres</a>
+      <a href="../../index.html"><span class="ico">🌐</span> Voir le site</a>
+    </aside>
+
+    <main class="main">
+      <div class="top-bar">
+        <h1>Tableau de bord admin</h1>
+        <button class="btn-primary" style="font-size:14px; padding:10px 20px;">+ Nouveau service</button>
+      </div>
+
+      <!-- Métriques clés -->
+      <div class="metrics">
+        <div class="metric">
+          <div class="num" id="m-clients">0</div>
+          <div class="lbl">Clients total</div>
+          <div class="change">↑ +12 ce mois</div>
+        </div>
+        <div class="metric">
+          <div class="num" id="m-revenus">0 €</div>
+          <div class="lbl">Revenus du mois</div>
+          <div class="change">↑ +18% vs mois dernier</div>
+        </div>
+        <div class="metric">
+          <div class="num" id="m-commandes">0</div>
+          <div class="lbl">Commandes actives</div>
+          <div class="change">↑ +5 cette semaine</div>
+        </div>
+        <div class="metric">
+          <div class="num">4.9 ★</div>
+          <div class="lbl">Note moyenne</div>
+          <div class="change">Basé sur 43 avis</div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+
+        <!-- Derniers clients -->
+        <div class="card">
+          <h2>Derniers clients inscrits</h2>
+          <table>
+            <thead>
+              <tr><th>Nom</th><th>Email</th><th>Rôle</th><th>Action</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Marie D.</strong></td>
+                <td>marie@ex.fr</td>
+                <td><span class="badge badge-actif">Client</span></td>
+                <td><button class="action-btn">Voir</button></td>
+              </tr>
+              <tr>
+                <td><strong>Julien M.</strong></td>
+                <td>julien@ex.fr</td>
+                <td><span class="badge badge-actif">Client</span></td>
+                <td><button class="action-btn">Voir</button></td>
+              </tr>
+              <tr>
+                <td><strong>Sophie L.</strong></td>
+                <td>sophie@ex.fr</td>
+                <td><span class="badge badge-admin">Admin</span></td>
+                <td><button class="action-btn">Voir</button></td>
+              </tr>
+              <tr>
+                <td><strong>Alex B.</strong></td>
+                <td>alex@ex.fr</td>
+                <td><span class="badge badge-actif">Client</span></td>
+                <td><button class="action-btn">Voir</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Dernières commandes -->
+        <div class="card">
+          <h2>Commandes récentes</h2>
+          <table>
+            <thead>
+              <tr><th>Projet</th><th>Montant</th><th>Statut</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>App mobile</strong></td>
+                <td>1 200 €</td>
+                <td><span class="badge badge-actif">En cours</span></td>
+              </tr>
+              <tr>
+                <td><strong>Dashboard stats</strong></td>
+                <td>490 €</td>
+                <td><span class="badge badge-attente">En attente</span></td>
+              </tr>
+              <tr>
+                <td><strong>Shopify premium</strong></td>
+                <td>290 €</td>
+                <td><span class="badge badge-actif">En cours</span></td>
+              </tr>
+              <tr>
+                <td><strong>Landing page</strong></td>
+                <td>190 €</td>
+                <td><span class="badge badge-attente">En attente</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+      <!-- Graphique simplifié (barres CSS) -->
+      <div class="card">
+        <h2>Revenus par mois (2025)</h2>
+        <div id="chart" style="display:flex; align-items:flex-end; gap:10px; height:120px; padding-top:10px;"></div>
+        <div id="chart-labels" style="display:flex; gap:10px; margin-top:8px;"></div>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    // Vérifier si l'utilisateur est admin
+    const utilisateur = JSON.parse(localStorage.getItem('utilisateur') || 'null');
+    if (!utilisateur || utilisateur.role !== 'admin') {
+      window.location.href = '../../pages/login.html';
+    } else {
+      document.getElementById('admin-email').textContent = utilisateur.email;
+    }
+
+    function seDeconnecter() { localStorage.removeItem('utilisateur'); }
+
+    // Animation des métriques
+    function animer(id, cible, suffixe) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      let v = 0;
+      const step = cible / 40;
+      const iv = setInterval(() => {
+        v = Math.min(v + step, cible);
+        el.textContent = Math.floor(v) + suffixe;
+        if (v >= cible) clearInterval(iv);
+      }, 30);
+    }
+    animer('m-clients', 124, '');
+    animer('m-revenus', 8420, ' €');
+    animer('m-commandes', 23, '');
+
+    // Graphique en barres simple (CSS)
+    const mois = ['Jan','Fév','Mar','Avr','Mai','Jun'];
+    const valeurs = [3200, 4100, 3800, 5600, 7200, 8420];
+    const max = Math.max(...valeurs);
+    const chart = document.getElementById('chart');
+    const labels = document.getElementById('chart-labels');
+
+    mois.forEach((m, i) => {
+      const pct = Math.round((valeurs[i] / max) * 100);
+      const bar = document.createElement('div');
+      bar.style.cssText = `flex:1; background:var(--violet); border-radius:6px 6px 0 0; height:${pct}%; opacity:${0.5 + pct/200}; transition:height 1s ease; title:'${valeurs[i]} €'`;
+      bar.title = valeurs[i] + ' €';
+      chart.appendChild(bar);
+
+      const lbl = document.createElement('div');
+      lbl.style.cssText = 'flex:1; text-align:center; font-size:12px; color:var(--texte-gris);';
+      lbl.textContent = m;
+      labels.appendChild(lbl);
+    });
+  </script>
+</body>
+</html>
