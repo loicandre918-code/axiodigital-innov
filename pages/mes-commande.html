@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Mes commandes</title>
+  <link rel="stylesheet" href="../css/style.css">
+
+  <style>
+    body {
+      background: var(--fond-gris);
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      color: var(--violet-fonce);
+      font-size: 24px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      border: 1px solid var(--bordure);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      text-align: left;
+      padding: 12px;
+      font-size: 13px;
+      color: var(--texte-gris);
+      border-bottom: 1px solid var(--bordure);
+    }
+
+    td {
+      padding: 14px 12px;
+      border-bottom: 1px solid var(--fond-gris);
+      font-size: 14px;
+    }
+
+    .badge {
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .en-cours { background: #E0F7FA; color: #00695C; }
+    .termine { background: #E8F5E9; color: #2E7D32; }
+    .attente { background: #FFF3E0; color: #EF6C00; }
+
+    .empty {
+      text-align: center;
+      padding: 40px;
+      color: var(--texte-gris);
+    }
+
+    .btn-back {
+      text-decoration: none;
+      color: white;
+      background: var(--violet);
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1>📦 Mes commandes</h1>
+    <a href="dashboard.html" class="btn-back">⬅ Retour</a>
+  </div>
+
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>Produit</th>
+          <th>Date</th>
+          <th>Prix</th>
+          <th>Statut</th>
+        </tr>
+      </thead>
+      <tbody id="commandes-body">
+        <!-- rempli dynamiquement -->
+      </tbody>
+    </table>
+
+    <div id="empty" class="empty" style="display:none;">
+      Aucune commande pour le moment 😕
+    </div>
+  </div>
+
+</div>
+
+<script>
+const SUPABASE_URL = "https://qnygcapchhosngnfvpoc.supabase.co";
+const SUPABASE_KEY = "sb_publishable_QonESzjYgZM5l8Fo8hpgUg_nYYpYrVv";
+
+// Vérification utilisateur
+const utilisateur = JSON.parse(localStorage.getItem('utilisateur'));
+
+if (!utilisateur) {
+  window.location.href = "login.html";
+}
+
+// Charger les commandes
+async function chargerCommandes() {
+  const res = await fetch(
+    SUPABASE_URL + "/rest/v1/commandes?email=eq." + utilisateur.email,
+    {
+      headers: {
+        "apikey": SUPABASE_KEY
+      }
+    }
+  );
+
+  const data = await res.json();
+
+  const table = document.getElementById("commandes-body");
+  const empty = document.getElementById("empty");
+
+  table.innerHTML = "";
+
+  if (data.length === 0) {
+    empty.style.display = "block";
+    return;
+  }
+
+  data.forEach(cmd => {
+
+    let statutClass = "attente";
+    if (cmd.statut === "en cours") statutClass = "en-cours";
+    if (cmd.statut === "terminé") statutClass = "termine";
+
+    table.innerHTML += `
+      <tr>
+        <td><strong>${cmd.produit}</strong></td>
+        <td>${new Date(cmd.date).toLocaleDateString()}</td>
+        <td>${cmd.prix} €</td>
+        <td><span class="badge ${statutClass}">${cmd.statut}</span></td>
+      </tr>
+    `;
+  });
+}
+
+chargerCommandes();
+</script>
+
+</body>
+</html>
