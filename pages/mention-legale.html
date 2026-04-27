@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mentions légales - axiodigital </title>
+  
+</head>
+<body>
+<style>
+  /* =========================
+   RESET & BASE
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", "Segoe UI", sans-serif;
+}
+
+body {
+  background: #0f172a; /* bleu nuit moderne */
+  color: #e2e8f0;
+  line-height: 1.6;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* =========================
+   HEADER
+========================= */
+.header {
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 0;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: #38bdf8;
+}
+
+/* NAV */
+nav a {
+  margin-left: 18px;
+  text-decoration: none;
+  color: #cbd5e1;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: #38bdf8;
+}
+
+.btn-nav {
+  background: #38bdf8;
+  color: #0f172a !important;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.btn-nav:hover {
+  background: #0ea5e9;
+}
+
+/* =========================
+   PAGE CONTENT
+========================= */
+.page-content {
+  padding: 80px 0;
+}
+
+/* TITRE */
+.page-content h1 {
+  font-size: 36px;
+  margin-bottom: 30px;
+  color: #ffffff;
+  border-left: 5px solid #38bdf8;
+  padding-left: 15px;
+}
+
+/* BLOCS */
+.page-content h2 {
+  margin-top: 40px;
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: #38bdf8;
+}
+
+.page-content p {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: #cbd5e1;
+  transition: 0.3s;
+}
+
+.page-content p:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* strong highlight */
+.page-content strong {
+  color: #ffffff;
+}
+
+/* =========================
+   FOOTER
+========================= */
+.footer {
+  margin-top: 80px;
+  padding: 30px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(15, 23, 42, 0.95);
+}
+
+.footer .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.footer p {
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.footer-links a {
+  margin-left: 15px;
+  text-decoration: none;
+  color: #cbd5e1;
+  font-size: 13px;
+  transition: 0.3s;
+}
+
+.footer-links a:hover {
+  color: #38bdf8;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  .header .container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  nav a {
+    margin-left: 10px;
+    font-size: 13px;
+  }
+
+  .page-content h1 {
+    font-size: 28px;
+  }
+
+  .footer .container {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+</style>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container">
+      <div class="logo">🦕 axiodigital</div>
+      <nav>
+        <a href="../index.html">Accueil</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html" class="btn-nav">Se connecter</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CONTENU -->
+  <section class="page-content">
+    <div class="container">
+
+      <h1>Mentions légales</h1>
+
+      <h2>1. Éditeur du site</h2>
+      <p>
+        Le site <strong>axiodigital</strong> est édité par :<br>Loïc ANDRE<br>
+
+        Nom / Raison sociale : <strong>AxioDigital</strong><br>
+        Adresse : <strong>15 rue emile duport (69009 Lyon)</strong><br>
+        Email : <strong>axiodigital.pro@gmail.com</strong><br>
+        Téléphone : <strong>07.68.44.40.51</strong><br>
+        SIRET : <strong>[si applicable]</strong>
+      </p>
+
+      <h2>2. Directeur de publication</h2>
+      <p>
+        Le directeur de publication est : <strong>ANDRE Loïc</strong>
+      </p>
+
+      <h2>3. Hébergement</h2>
+     
+
+      <h2>4. Propriété intellectuelle</h2>
+      <p>
+        L’ensemble du contenu du site (textes, images, graphismes, logo, icônes, etc.) est la propriété exclusive de axiodigital, sauf mention contraire.
+        Toute reproduction, distribution, modification ou utilisation sans autorisation préalable est interdite.
+      </p>
+
+      <h2>5. Données personnelles</h2>
+      <p>
+        Les informations collectées via les formulaires du site sont uniquement destinées à axiodigital.
+        Conformément au RGPD, vous pouvez demander l’accès, la modification ou la suppression de vos données en nous contactant à :
+        <strong>axiodigital.pro@gmail.com</strong>
+      </p>
+
+      <h2>6. Cookies</h2>
+      <p>
+        Le site peut utiliser des cookies pour améliorer l’expérience utilisateur et les statistiques de visite.
+        Vous pouvez configurer votre navigateur pour refuser les cookies.
+      </p>
+
+      <h2>7. Responsabilité</h2>
+      <p>
+        axiodigital ne pourra être tenu responsable des dommages directs ou indirects causés au matériel de l’utilisateur lors de l’accès au site.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 axiodigital — Tous droits réservés</p>
+      <div class="footer-links">
+        <a href="contact.html">Contact</a>
+        <a href="mentions-legales.html">Mentions légales</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
